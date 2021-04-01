@@ -2,33 +2,25 @@ import sys
 import os
 import filecmp
 
-def Accepted_Code(in_f, out_f):
-    input = in_f.readline
-    tmp = sys.stdout
-    sys.stdout = out_f
-    ##################################################
-    # 이 하단에 코드를 입력하세요.
+def Accepted_Code():
+    import math
+    n,*l=map(int,sys.stdin)
+    l=sorted(l[:n])
+    l=[w-v for v,w in zip(l,l[1:])]
+    g=math.gcd(*l)
+    print(sum(i//g-1 for i in l))
+    pass
 
-    a, b, c = map(int, input().rstrip().split())
-    print(a+b+c)
-    
-    ##################################################
-    sys.stdout = tmp
-    return
+def Wrong_Answer_Code():
+    import math
 
-def Wrong_Answer_Code(in_f, out_f):
-    input = in_f.readline
-    tmp = sys.stdout
-    sys.stdout = out_f
-    ##################################################
-    # 이 하단에 코드를 입력하세요.
+    _, *S = map(lambda x:int(x.rstrip()), sys.stdin)
+    S = sorted(S[:_])
+    t=[b-a for a,b in zip(S,S[1:])]
 
-    a, b, c = map(int, input().rstrip().split())
-    print(a+b+c)
-
-    ##################################################
-    sys.stdout = tmp
-    return
+    r = math.gcd(*t)
+    print(sum(t)//r-len(t))
+    pass
 
 input_path = "output_testcase/"
 output_path = "result_testcase/"
@@ -36,7 +28,7 @@ extension = ".txt"
 input_file_name_base = "output_case_"
 accepted_output_file_name_base = "_result_by_case_accepted"
 wrong_output_file_name_base = "_result_by_case_wrong"
-F = 100
+F = 1000
 T = 1
 
 if not os.path.exists(input_path):
@@ -45,7 +37,7 @@ if not os.path.exists(input_path):
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 
-for i in range(F):
+for i in range(1, F+1):
     input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
     accepted_in_f = open(input_file_name, 'r')
     wrong_in_f = open(input_file_name, 'r')
@@ -57,8 +49,16 @@ for i in range(F):
     wrong_out_f = open(wrong_output_file_name, 'w')
 
     for j in range(T):
-        Accepted_Code(accepted_in_f, accepted_out_f)
-        Wrong_Answer_Code(wrong_in_f, wrong_out_f)
+        tmp = sys.stdout
+        tmp2 = sys.stdin
+        sys.stdout = accepted_out_f
+        sys.stdin = accepted_in_f
+        Accepted_Code()
+        sys.stdout = wrong_out_f
+        sys.stdin = wrong_in_f
+        Wrong_Answer_Code()
+        sys.stdout = tmp
+        sys.stdin = tmp2
 
     accepted_in_f.close()
     wrong_in_f.close()

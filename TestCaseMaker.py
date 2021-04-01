@@ -1,3 +1,4 @@
+import sys
 import os
 import random
 
@@ -14,18 +15,20 @@ import random
 output_path = "output_testcase/";
 output_file_name_base = "output_case_";
 extension = ".txt";
-F = 100
+F = 1000
 T = 1
 
 # 폴더가 존재하지 않을 경우, 폴더를 생성
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 
-for i in range(F):
-    f = open(f'{output_path}{output_file_name_base}{i}{extension}', 'w')
+for i in range(1, F+1):
+    sys.stdout = open(f'{output_path}{output_file_name_base}{i}{extension}', 'w')
     for j in range(T):
-        a = random.randrange(1,5)
-        b = random.randrange(1,5)
-        c = random.randrange(1,5)
-        f.write(f'{a} {b} {c}')
-    f.close()
+        N = random.randrange(3,10)
+        print(N)
+        l = list(range(1,1001))
+        random.shuffle(l)
+        l = l[:N]
+        #l.sort()
+        print(*l, sep='\n', end='')
