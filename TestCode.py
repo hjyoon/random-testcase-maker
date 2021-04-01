@@ -36,7 +36,7 @@ extension = ".txt"
 input_file_name_base = "output_case_"
 accepted_output_file_name_base = "_result_by_case_accepted"
 wrong_output_file_name_base = "_result_by_case_wrong"
-F = 10
+F = 100
 T = 1
 
 if not os.path.exists(input_path):
