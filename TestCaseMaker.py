@@ -25,10 +25,22 @@ if not os.path.exists(output_path):
 for i in range(1, F+1):
     sys.stdout = open(f'{output_path}{output_file_name_base}{i}{extension}', 'w')
     for j in range(T):
-        N = random.randrange(3,10)
-        print(N)
-        l = list(range(1,1001))
+        N = random.randrange(1,3)
+        M = random.randrange(1,3)
+        print(N, M)
+        l = list(range(2,99))
         random.shuffle(l)
-        l = l[:N]
-        #l.sort()
-        print(*l, sep='\n', end='')
+        for i in range(N):
+            a = l[i]
+            x = random.randrange(a+1, 100)
+            print(a, x)
+        l = list(range(3,100))
+        random.shuffle(l)
+        for i in range(M):
+            a = l[i]
+            y = random.randrange(2, a)
+            if i == M-1:
+                print(a, y, end='')
+            else:
+                print(a, y)
+        #print(*l, sep='\n', end='')

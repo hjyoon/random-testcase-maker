@@ -3,23 +3,91 @@ import os
 import filecmp
 
 def Accepted_Code():
-    import math
-    n,*l=map(int,sys.stdin)
-    l=sorted(l[:n])
-    l=[w-v for v,w in zip(l,l[1:])]
-    g=math.gcd(*l)
-    print(sum(i//g-1 for i in l))
+    from collections import deque
+   
+    def solve(n,m) :
+        snake = [0 for _ in range(101)]
+        ledder = [0 for k in range(101)]
+        #합쳐서 관리하는게 더 나을 것 같다.
+        
+        visited = [False for _ in range(101)]
+
+        for i in range(n) :
+            x , y = map(int,input().split())
+            ledder[x] = y
+        
+        for j in range(m) :
+            x , y = map(int,input().split())
+            snake[x] = y
+
+        q = deque()
+
+        q.append((1,0))
+        visited[1] = True
+
+        ans = float("inf")
+
+        while q :
+            
+            front = q.popleft()
+
+            if front[0] == 100 :
+                ans = min(ans, front[1])
+                continue
+
+
+            for i in range(1,7) :
+                new = front[0]+i
+                
+                if new > 100 :continue
+                
+                if visited[new] == True :
+                    continue
+                
+                visited[new] = True
+
+                if snake[new] != 0 :
+                    new = snake[new]
+                
+                if ledder[new] != 0 :
+                    new = ledder[new]
+
+                q.append((new,front[1]+1))
+        
+        print(ans)
+            
+            
+
+    n,m = map(int,input().split())
+    solve(n,m)
     pass
 
 def Wrong_Answer_Code():
-    import math
+    N, M = map(int, input().rstrip().split())
+    m = [0]*101
+    r = [999999]*101
+    for i in range(N+M):
+        x, y = map(int, input().rstrip().split())
+        m[x] = y
 
-    _, *S = map(lambda x:int(x.rstrip()), sys.stdin)
-    S = sorted(S[:_])
-    t=[b-a for a,b in zip(S,S[1:])]
+    def go(now, step):
+        #print(now, step)
+        if now > 100:
+            return
+        if step >= r[now]:
+            return
+        r[now] = step
+        if m[now] != 0:
+            go(m[now], step)
+            return
+        if now == 100:
+            return
+        for i in range(1, 7):
+            go(now+i, step+1)
 
-    r = math.gcd(*t)
-    print(sum(t)//r-len(t))
+    go(1, 0)
+    #print(*r)
+    print(r[100])
     pass
 
 input_path = "output_testcase/"
@@ -66,14 +134,21 @@ for i in range(1, F+1):
     wrong_out_f.close()
 
     if filecmp.cmp(accepted_output_file_name, wrong_output_file_name):
-        print(f'case #{i}: OK')
+        #print(f'case #{i}: OK')
+        pass
     else:
+        input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
+        testcase_in_f = open(input_file_name, 'r')
         accepted_out_f = open(accepted_output_file_name, 'r')
         wrong_out_f = open(wrong_output_file_name, 'r')
         print(f'case #{i}: ERR')
+        print('input:')
+        print(*testcase_in_f.readlines(), sep='')
+        print()
         print('accepted:')
         print(*accepted_out_f.readlines(), sep='')
         print('wrong answer:')
         print(*wrong_out_f.readlines(), sep='')
         accepted_out_f.close()
         wrong_out_f.close()
+        pass
