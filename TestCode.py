@@ -98,6 +98,9 @@ accepted_output_file_name_base = "_result_by_case_accepted"
 wrong_output_file_name_base = "_result_by_case_wrong"
 F = 1000
 T = 1
+SHOW_OK_CASE = False
+SHOW_ERR_CASE_INPUT = False
+SHOW_ERR_CASE_OUTPUT = False
 
 if not os.path.exists(input_path):
     os.makedirs(input_path)
@@ -134,21 +137,25 @@ for i in range(1, F+1):
     wrong_out_f.close()
 
     if filecmp.cmp(accepted_output_file_name, wrong_output_file_name):
-        #print(f'case #{i}: OK')
+        if SHOW_OK_CASE:
+            print(f'case #{i}: OK')
         pass
     else:
-        input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
-        testcase_in_f = open(input_file_name, 'r')
-        accepted_out_f = open(accepted_output_file_name, 'r')
-        wrong_out_f = open(wrong_output_file_name, 'r')
         print(f'case #{i}: ERR')
-        print('input:')
-        print(*testcase_in_f.readlines(), sep='')
-        print()
-        print('accepted:')
-        print(*accepted_out_f.readlines(), sep='')
-        print('wrong answer:')
-        print(*wrong_out_f.readlines(), sep='')
-        accepted_out_f.close()
-        wrong_out_f.close()
+        if SHOW_ERR_CASE_INPUT:
+            input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
+            testcase_in_f = open(input_file_name, 'r')
+            print('input:')
+            print(*testcase_in_f.readlines(), sep='')
+            print()
+            testcase_in_f.close()
+        if SHOW_ERR_CASE_OUTPUT:
+            accepted_out_f = open(accepted_output_file_name, 'r')
+            wrong_out_f = open(wrong_output_file_name, 'r')
+            print('accepted:')
+            print(*accepted_out_f.readlines(), sep='')
+            print('wrong answer:')
+            print(*wrong_out_f.readlines(), sep='')
+            accepted_out_f.close()
+            wrong_out_f.close()
         pass
