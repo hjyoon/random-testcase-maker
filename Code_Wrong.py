@@ -2,15 +2,30 @@ def Code_Wrong():
     import sys
     input = sys.stdin.readline
 
-    import itertools
+    N, *S = list(map(lambda x:x.rstrip(), sys.stdin))
 
-    N = int(input().rstrip())
-    S = []
-    for i in range(N):
-        S.append(int(input().rstrip()))
+    left = 1 
+    right = len(S[0])
+    mid = 0
+    res = 0
 
-    S.sort()
+    def chk():
+        s = set()
+        for v in S:
+            s.add(v[len(S[0])-mid:])
+        if len(s) == len(S):
+            return True
+        else:
+            return False
 
-    t = list(itertools.accumulate(S, lambda x,y:x+y))
-    print(sum(t[1:]))
-    pass
+    while left <= right:
+        mid = (left + right) // 2
+        if chk():
+            #print(left, right, mid, 'True')
+            res = mid
+            right = mid - 1
+        else :
+            #print(left, right, mid, 'False')
+            left = mid + 1
+
+    print(res)

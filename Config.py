@@ -1,11 +1,13 @@
 input_path = "output_testcase/"
-output_path = "result_testcase/"
+output_path_code_result = "result_testcase/"
+output_path_testcase = "output_testcase/"
 extension = ".txt"
 input_file_name_base = "output_case_"
+output_file_name_base = "output_case_"
 accepted_output_file_name_base = "_result_by_case_accepted"
 wrong_output_file_name_base = "_result_by_case_wrong"
-F = 1000
+F = 5000
 T = 1
-SHOW_OK_CASE = False
+SHOW_OK_CASE = True
 SHOW_ERR_CASE_INPUT = True
 SHOW_ERR_CASE_OUTPUT = True

@@ -8,18 +8,18 @@ from Config import *
 if not os.path.exists(input_path):
     os.makedirs(input_path)
 
-if not os.path.exists(output_path):
-    os.makedirs(output_path)
+if not os.path.exists(output_path_code_result):
+    os.makedirs(output_path_code_result)
 
 for i in range(1, F+1):
     input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
     accepted_in_f = open(input_file_name, 'r')
     wrong_in_f = open(input_file_name, 'r')
 
-    accepted_output_file_name = f'{output_path}{i}{accepted_output_file_name_base}{extension}'
+    accepted_output_file_name = f'{output_path_code_result}{i}{accepted_output_file_name_base}{extension}'
     accepted_out_f = open(accepted_output_file_name, 'w')
 
-    wrong_output_file_name = f'{output_path}{i}{wrong_output_file_name_base}{extension}'
+    wrong_output_file_name = f'{output_path_code_result}{i}{wrong_output_file_name_base}{extension}'
     wrong_out_f = open(wrong_output_file_name, 'w')
 
     for j in range(T):
