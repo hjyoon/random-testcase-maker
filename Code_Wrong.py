@@ -1,31 +1,24 @@
 def Code_Wrong():
     import sys
+    #sys.stdin = open("input.txt", 'r')
     input = sys.stdin.readline
 
-    N, *S = list(map(lambda x:x.rstrip(), sys.stdin))
-
-    left = 1 
-    right = len(S[0])
-    mid = 0
-    res = 0
-
-    def chk():
-        s = set()
-        for v in S:
-            s.add(v[len(S[0])-mid:])
-        if len(s) == len(S):
-            return True
+    N, K = map(int, input().rstrip().split())
+    L = list(map(int, input().rstrip().split()))
+    l = []
+    r = float('-inf')
+    for i in range(N):
+        if len(l) == 0:
+            l.append(L[i])
         else:
-            return False
+            l.append(l[i-1] + L[i])
 
-    while left <= right:
-        mid = (left + right) // 2
-        if chk():
-            #print(left, right, mid, 'True')
-            res = mid
-            right = mid - 1
-        else :
-            #print(left, right, mid, 'False')
-            left = mid + 1
+    for i in range(K-1, N):
+        if i-K >= 0:
+            r = max(r, l[i]-l[i-K])
+            #print(l[i]-l[i-K])
+        else:
+            r = max(r, l[i])
+            #print(l[i])
 
-    print(res)
+    print(r)
