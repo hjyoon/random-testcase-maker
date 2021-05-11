@@ -22,6 +22,8 @@ for i in range(1, F+1):
     wrong_output_file_name = f'{output_path_code_result}{i}{wrong_output_file_name_base}{extension}'
     wrong_out_f = open(wrong_output_file_name, 'w')
 
+    fixed_answer_file_name = f'{fixed_answer_file_name_base}{extension}'
+
     for j in range(T):
         tmp = sys.stdout
         tmp2 = sys.stdin
@@ -39,26 +41,68 @@ for i in range(1, F+1):
     accepted_out_f.close()
     wrong_out_f.close()
 
-    if filecmp.cmp(accepted_output_file_name, wrong_output_file_name):
-        if SHOW_OK_CASE:
+    if FIXED_ANSWER_MODE:
+        if filecmp.cmp(fixed_answer_file_name, wrong_output_file_name):
             print(f'case #{i}: OK')
-        pass
+            if SHOW_OK_CASE_INPUT:
+                testcase_in_f = open(input_file_name, 'r')
+                print('input:')
+                print(*testcase_in_f.readlines(), sep='')
+                print()
+                testcase_in_f.close()
+            if SHOW_OK_CASE_OUTPUT:
+                accepted_out_f = open(fixed_answer_file_name, 'r')
+                print('accepted:')
+                print(*accepted_out_f.readlines(), sep='')
+                accepted_out_f.close()
+        else:
+            print(f'case #{i}: ERR')
+            if SHOW_ERR_CASE_INPUT:
+                testcase_in_f = open(input_file_name, 'r')
+                print('input:')
+                print(*testcase_in_f.readlines(), sep='')
+                print()
+                testcase_in_f.close()
+            if SHOW_ERR_CASE_OUTPUT:
+                accepted_out_f = open(fixed_answer_file_name, 'r')
+                wrong_out_f = open(wrong_output_file_name, 'r')
+                print('accepted:')
+                print(*accepted_out_f.readlines(), sep='')
+                print('wrong answer:')
+                print(*wrong_out_f.readlines(), sep='')
+                accepted_out_f.close()
+                wrong_out_f.close()
     else:
-        print(f'case #{i}: ERR')
-        if SHOW_ERR_CASE_INPUT:
-            input_file_name = f'{input_path}{input_file_name_base}{i}{extension}'
-            testcase_in_f = open(input_file_name, 'r')
-            print('input:')
-            print(*testcase_in_f.readlines(), sep='')
-            print()
-            testcase_in_f.close()
-        if SHOW_ERR_CASE_OUTPUT:
-            accepted_out_f = open(accepted_output_file_name, 'r')
-            wrong_out_f = open(wrong_output_file_name, 'r')
-            print('accepted:')
-            print(*accepted_out_f.readlines(), sep='')
-            print('wrong answer:')
-            print(*wrong_out_f.readlines(), sep='')
-            accepted_out_f.close()
-            wrong_out_f.close()
-        pass
+        if filecmp.cmp(accepted_output_file_name, wrong_output_file_name):
+            if SHOW_OK_CASE:
+                print(f'case #{i}: OK')
+                if SHOW_OK_CASE_INPUT:
+                    testcase_in_f = open(input_file_name, 'r')
+                    print('input:')
+                    print(*testcase_in_f.readlines(), sep='')
+                    print()
+                    testcase_in_f.close()
+                if SHOW_OK_CASE_OUTPUT:
+                    accepted_out_f = open(accepted_output_file_name, 'r')
+                    print('accepted:')
+                    print(*accepted_out_f.readlines(), sep='')
+                    accepted_out_f.close()
+            pass
+        else:
+            print(f'case #{i}: ERR')
+            if SHOW_ERR_CASE_INPUT:
+                testcase_in_f = open(input_file_name, 'r')
+                print('input:')
+                print(*testcase_in_f.readlines(), sep='')
+                print()
+                testcase_in_f.close()
+            if SHOW_ERR_CASE_OUTPUT:
+                accepted_out_f = open(accepted_output_file_name, 'r')
+                wrong_out_f = open(wrong_output_file_name, 'r')
+                print('accepted:')
+                print(*accepted_out_f.readlines(), sep='')
+                print('wrong answer:')
+                print(*wrong_out_f.readlines(), sep='')
+                accepted_out_f.close()
+                wrong_out_f.close()
+            pass
