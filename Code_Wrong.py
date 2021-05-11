@@ -1,24 +1,38 @@
+ans = None
 def Code_Wrong():
+    global ans
     import sys
     #sys.stdin = open("input.txt", 'r')
     input = sys.stdin.readline
 
-    N, K = map(int, input().rstrip().split())
-    L = list(map(int, input().rstrip().split()))
-    l = []
-    r = float('-inf')
-    for i in range(N):
-        if len(l) == 0:
-            l.append(L[i])
-        else:
-            l.append(l[i-1] + L[i])
+    N = int(input().rstrip())
+    S = list(map(int, input().rstrip().split()))
+    O = list(map(int, input().rstrip().split()))
 
-    for i in range(K-1, N):
-        if i-K >= 0:
-            r = max(r, l[i]-l[i-K])
-            #print(l[i]-l[i-K])
-        else:
-            r = max(r, l[i])
-            #print(l[i])
+    def dfs(i, s, cmp):
+        global ans
+        if i == N:
+            ans = cmp(ans, s)
+            #print(ans)
+            return
+        for j in range(4):
+            if O[j] == 0:
+                continue
+            O[j] -= 1
+            if j == 0:
+                dfs(i+1, s+S[i], cmp)
+            elif j == 1:
+                dfs(i+1, s-S[i], cmp)
+            elif j == 2:
+                dfs(i+1, s*S[i], cmp)
+            else:
+                dfs(i+1, s//S[i], cmp)
+            O[j] += 1
 
-    print(r)
+    ans = float('-inf')
+    dfs(1, S[0], max)
+    print(ans)
+
+    ans = float('inf')
+    dfs(1, S[0], min)
+    print(ans)

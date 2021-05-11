@@ -21,10 +21,12 @@ for i in range(1, F+1):
     sys.stdout = open(f'{output_path_testcase}{output_file_name_base}{i}{extension}', 'w')
     S = []
     for j in range(T):
-        N = random.randrange(2,10)
-        K = random.randrange(1,N)
-        S.append(f'{N} {K}\n')
-        for i in range(N):
-            x = random.randrange(-10, 10)
+        N = random.randrange(2,12)
+        S.append(f'{N}\n')
+        for _ in range(N):
+            S.append(f'{random.randrange(1,101)} ')
+        S.append(f'\n')
+        for _ in range(4):
+            x = random.randrange(N-1, 4*N)
             S.append(f'{x} ')
     print(''.join(S).rstrip(), end='')
