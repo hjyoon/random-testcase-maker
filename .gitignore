@@ -1,6 +1,7 @@
 # output and results
-/output_testcase
-/result_testcase
+/generated_testcase
+/result
+/user_custom_testcase
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
