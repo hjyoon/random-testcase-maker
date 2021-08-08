@@ -1,4 +1,4 @@
-#=== TestCode.py ===
+# === TestCode.py ===
 
 # 정답코드와 틀린코드의 결과 비교 시, 정답인 경우 OK출력 여부
 SHOW_OK_CASE = True
@@ -33,7 +33,8 @@ G_TC_MODE = 0
 USER_CUSTOM_MODE = 1
 
 # 어떤 모드를 사용할지 고른다.
-TEST_CODE_MODE = G_TC_MODE # (GENERATED_TESTCASE_MODE, USER_CUSTOM_MODE) 둘 중 하나를 대입
+# (GENERATED_TESTCASE_MODE, USER_CUSTOM_MODE) 둘 중 하나를 대입
+TEST_CODE_MODE = G_TC_MODE
 
 # 사용자 테스트케이스 파일 저장 경로
 INPUT_PATH_USER_CUSTOM = "user_custom_testcase/"

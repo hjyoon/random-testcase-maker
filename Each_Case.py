@@ -2,10 +2,12 @@ import random
 import itertools
 import collections
 
+# random.randrange(1, 9) 1 ~ 8 범위의 랜덤한 정수 반환
+
+
 def Each_Case():
-    N = random.randrange(1,11)
-    print(N)
-    for _ in range(N):
-        a = random.randrange(1,10)
-        b = random.randrange(1,10)
-        print(a, b)
+    pass
+
+
+if __name__ == "__main__":
+    Each_Case()

@@ -3,6 +3,7 @@ import os
 from TestCaseMaker_Config import *
 from Each_Case import Each_Case
 
+
 def removeAllFile(filePath):
     if os.path.exists(filePath):
         for file in os.scandir(filePath):
@@ -10,6 +11,7 @@ def removeAllFile(filePath):
         return 'Remove All File'
     else:
         return 'Directory Not Found'
+
 
 if not os.path.exists(OUTPUT_PATH_TC):
     os.makedirs(OUTPUT_PATH_TC)

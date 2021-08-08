@@ -5,10 +5,11 @@ MANY_FILE_TC_MODE = 0
 ONE_FILE_TC_MODE = 1
 
 # 어떤 모드를 사용할지 고른다.
-TC_MAKER_MODE = MANY_FILE_TC_MODE # (MANY_FILE_TESTCASE_MODE, ONE_FILE_TESTCASE_MODE) 둘 중 하나를 대입
+# (MANY_FILE_TESTCASE_MODE, ONE_FILE_TESTCASE_MODE) 둘 중 하나를 대입
+TC_MAKER_MODE = MANY_FILE_TC_MODE
 
 # 생성할 테스트케이스 개수 (1 ~ 9999)
-T = 20
+T = 50
 
 # 생성된 테스트케이스 파일 저장 경로
 OUTPUT_PATH_TC = "generated_testcase/"

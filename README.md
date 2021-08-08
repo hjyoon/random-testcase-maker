@@ -48,3 +48,7 @@
 2. Code_Wrong.py 의 Code_Wrong 함수 내에 틀린 코드를 넣는다.
 3. TestCode_Config.py 에서 옵션을 설정한다.
 4. TestCode_Config.py 실행한다.
+
+### 주의사항
+
+- `exit()` 함수를 `return` 으로 대체할 것.

@@ -1,7 +1,7 @@
+# Code_Accepted() 함수에 틀린 코드를 작성하세요
 def Code_Wrong():
-    ans = 0
-    n = int(input())
-    for _ in range(n):
-        a, b = map(int, input().rstrip().split())
-        ans = a + b
-        print(ans)
+    pass
+
+
+if __name__ == "__main__":
+    Code_Wrong()
